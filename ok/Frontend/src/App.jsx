@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import TodoList from "./components/TodoList";
-import { api } from "./api";
+import { api } from "./api"; // this must have api base set to "/api/todos"
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -11,29 +11,45 @@ const App = () => {
 
   // Fetch all todos
   const fetchTodos = async () => {
-    const res = await api.get("/");
-    setTodos(res.data);
+    try {
+      const res = await api.get("/"); // <- baseURL should be /api/todos
+      setTodos(res.data);
+    } catch (err) {
+      console.error("Error fetching todos:", err);
+    }
   };
 
   // Add new todo
   const addTodo = async () => {
     if (title.trim() === "") return;
-    await api.post("/", { title, description });
-    setTitle("");
-    setDescription("");
-    fetchTodos();
+    try {
+      await api.post("/", { title, description });
+      setTitle("");
+      setDescription("");
+      fetchTodos();
+    } catch (err) {
+      console.error("Error adding todo:", err);
+    }
   };
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await api.delete(`/${id}`);
-    fetchTodos();
+    try {
+      await api.delete(`/${id}`);
+      fetchTodos();
+    } catch (err) {
+      console.error("Error deleting todo:", err);
+    }
   };
 
   // Toggle completed
   const toggleComplete = async (id) => {
-    await api.put(`/${id}`);
-    fetchTodos();
+    try {
+      await api.put(`/${id}`);
+      fetchTodos();
+    } catch (err) {
+      console.error("Error toggling todo:", err);
+    }
   };
 
   useEffect(() => {

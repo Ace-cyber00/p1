@@ -28,5 +28,6 @@
     "tailwindcss": "^4.1.11",
     "vite": "^7.0.0"
     
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

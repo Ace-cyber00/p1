@@ -1,5 +1,5 @@
-const express = require('express');
-import { run } from 'node:test';
+import express from "express";
+
 import {Todo} from '../models/todo.js';
 
 const router = express.Router();
@@ -75,6 +75,10 @@ router.delete('/todos/:id', async (req, res) => {
                 message: 'Todo not found'
             });
         }
+    res.json({
+      message: 'Todo deleted successfully',
+      deletedTodo
+    });
     } catch (error) {
         res.status(500).json({
             message: 'Error deleting todo',

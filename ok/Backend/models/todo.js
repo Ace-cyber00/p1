@@ -1,8 +1,8 @@
 // Importing mongoose to define the schema for the Todo model
-const mongoose = require("mongoose");
+import mongoose from "mongoose"
 
 // Defining the schema for the Todo model
-const todoSchema = new moongonse.schema({
+const todoSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -18,4 +18,4 @@ const todoSchema = new moongonse.schema({
 });
 
 // Exporting the Todo model based on the defined schema
-export const Todo = moongose.model("Todo",todoSchema);
+export const Todo = mongoose.model("Todo",todoSchema);
